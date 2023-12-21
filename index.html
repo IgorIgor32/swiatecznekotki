@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: 'MojaCzcionka';
+            src: url('moja_czcionka.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'MojaCzcionka', cursive;
+        }
+
+        .background-gif {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('https://media1.tenor.com/m/Jc9jT66AJRwAAAAd/chipi-chipi-chapa-chapa.gif') center/cover no-repeat;
+            z-index: 0;
+        }
+
+        .wishes {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            text-align: left;
+            color: red;
+            font-size: 24px;
+        }
+
+        #snowfall {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .candy-cane {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            width: 200px;
+            transform: scale(2); /* Powiększenie o 200% */
+            z-index: 2;
+        }
+
+        .letter-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .letter-input {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            width: 300px;
+        }
+
+        .send-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #fff;
+            color: red;
+            border: 2px solid red;
+            cursor: pointer;
+        }
+
+        .audio-button-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            z-index: 2;
+        }
+
+        .audio-button {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: pink;
+            color: white;
+            border: 2px solid pink;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+    <title>Świąteczna Strona</title>
+</head>
+<body>
+    <div class="background-gif"></div>
+    <div class="wishes">
+       <p>Niech te Święta, tak wspaniałe,</p> <p>będą całe jakby z bajek,</p> <p>niechaj gwiazdka z nieba leci.</p> <p>niech Mikołaj tuli dzieci,</p> <p>biały puch niech z góry spada,</p> <p>niechaj piesek w nocy gada.</p> <p>niech choinka pachnie pięknie,</p> <p>no i radość będzie wszędzie!</p>
+    </div>
+    <div id="snowfall"></div>
+    <img class="candy-cane" src="https://png.pngtree.com/png-vector/20230915/ourmid/pngtree-candy-cane-png-image_10082656.png" alt="Candy Cane">
+    <div class="letter-form">
+        <form>
+            <input class="letter-input" type="text" placeholder="Napisz list">
+            <button class="send-button" type="submit">Wyślij list do Św. Mikołaja</button>
+        </form>
+    </div>
+    <div class="audio-button-container">
+        <button class="audio-button" onclick="playSound('chipi.mp3')">Chipi</button>
+        <button class="audio-button" onclick="playSound('merry.mp3')">Last Christmas</button>
+    </div>
+    <script>
+        function createSnowflake() {
+            const snowflake = document.createElement("div");
+            snowflake.classList.add("snowflake");
+            snowflake.style.left = Math.random() * window.innerWidth + "px";
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+            snowflake.style.opacity = Math.random();
+            snowflake.style.fontSize = Math.random() * 12 + 8 + "px";
+
+            document.getElementById("snowfall").appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        }
+
+        setInterval(createSnowflake, 100);
+
+        function playSound(soundFile) {
+            const audio = new Audio(soundFile);
+            audio.play();
+        }
+    </script>
+</body>
+</html>
